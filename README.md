@@ -1,14 +1,18 @@
 # columbus
 
-##UI Mocks
-###Spash Page
+##UI Gestures and Navigation
+- [ ] From discovery page, user can swipe down to reveal the map. Can also swipe up (from the white space) to go back
+- [ ] From discovery page, user can swipe left to see profile page for log-out
+- [ ] From discovery page, user can swipe right to see favourites page
+
+###Spash Page (Victor)
 - [ ] Load some image as the splash screen
 
-###Login Page
+###Login Page (Victor)
 - [ ] Login with instagram and complete OAuth steps
 - [ ] Retain session for logged-in user
 
-###Discover Page
+###Discover Page 
 ![alt tag](https://github.com/vizhang/columbus/blob/master/1-discover.png)
 - [ ] Turn on GPS Access Priveledges
 - [ ] Background changes to settings steps if user clicked on "Cancel" for permissions
