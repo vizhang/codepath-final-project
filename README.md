@@ -6,7 +6,7 @@ Spash Page
 
 Login With Instagram Page
 
-[alt tag](https://github.com/vizhang/columbus/blob/master/1-discover.png)
+![alt tag](https://github.com/vizhang/columbus/blob/master/1-discover.png)
 
 This is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
