@@ -1,14 +1,26 @@
 # columbus
 
-UI Mocks
-
-Spash Page
+###UI Mocks
+##Spash Page
 
 Login With Instagram Page
 
+Discover Page
 ![alt tag](https://github.com/vizhang/columbus/blob/master/1-discover.png)
 
-This is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
+Discover Map Page
+![alt tag](https://github.com/vizhang/columbus/blob/master/1-discovermap.png)
+
+Favourites Page
+![alt tag](https://github.com/vizhang/columbus/blob/master/2-favorites.png)
+
+Adding Favourites Page
+
+Profile Page
+![alt tag](https://github.com/vizhang/columbus/blob/master/3-profile.png)
+
+Friends Page
+![alt tag](https://github.com/vizhang/columbus/blob/master/4-friends.png)
 
 Time spent: `10-12`
 
