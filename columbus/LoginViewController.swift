@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,5 +21,15 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func loginAction(sender: UIButton) {
+        InstagramClient.sharedInstance.loginWithCompletion() {
+            (user: User?, error: NSError?) in
+            if user != nil {
+                print("loggedin")
+            } else {
+                print("Error")
+            }
+        }
+    }
 }
 
