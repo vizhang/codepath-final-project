@@ -10,6 +10,6 @@ import Foundation
 
 
 class Location{
-    lat: String,
-    long: String
+    var lat: String?
+    var long: String?
 }

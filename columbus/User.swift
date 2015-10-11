@@ -12,15 +12,24 @@ var _currentUser : User?
 
 
 class User {
-    var name: String?
+    var full_name: String?
+    var username: String?
+    var profile_picture: String?
+    var bio: String?
+    var website: String?
     var dictionary : NSDictionary?
-    var location: Location
+    var location: Location?
 
     
     init (dictionary: NSDictionary) {
         self.dictionary = dictionary
         
-        name = dictionary["name"] as? String
+        full_name = dictionary["name"] as? String
+        username = dictionary["username"] as? String
+        bio = dictionary["bio"] as? String
+        website = dictionary["website"] as? String
+        profile_picture = dictionary["profile_picture"] as? String
+
     }
     
 

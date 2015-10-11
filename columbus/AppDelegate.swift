@@ -12,13 +12,43 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var storyboard = UIStoryboard(name: "Main", bundle: nil) //storyboard just parses XML
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //Get Log-out notifications
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
+        
+        //If user is logged in, take them directly  to discover page
+        //Check if there is a current user
+        /*
+        if User.currentUser != nil {
+            //force it to go into hamburgers
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
+            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+            
+            menuViewController.hamburgerViewController = hamburgerViewController
+            hamburgerViewController.menuViewController = menuViewController
+            window?.rootViewController = hamburgerViewController //force the change
+            
+        }
+        else {
+            println("Not detecting current user.")
+            
+        }
+        
+        */
+        
         return true
     }
 
+    func userDidLogout() {
+        //var vc = storyboard.instantiateInitialViewController() as? UIViewController
+        //window?.rootViewController = vc
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -48,25 +78,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("came back from Instagram mobile web")
         let urlString = String(url)
         let urlArray = urlString.characters.split{$0 == "="}.map(String.init)
-        //print("\(urlArray[1])")
         InstagramClient.sharedInstance.accessToken = urlArray[1]
 
-        print("trying to get locations")
-        //InstagramClient.sharedInstance.getNearByPlaces("43.6426", lng: "79.3871")
-        
-        InstagramClient.sharedInstance.getCurrentUser { (success, user) -> Void in
-            print(user);
-        }
-/*        InstagramClient.sharedInstance.getNearByMediaItems("43.6426", lng: "79.3871") { (success, json) -> Void in
-            if success {
-                print("success")
-                print(json)
+        //Set Current User
+        InstagramClient.sharedInstance.getCurrentUser() { (success, json) ->
+            Void in
+            if (success) {
+                //var user =
+                print("user info: \(json)")
             } else {
-                print("failed")
+                //failed
+                print("failed to get user info: \(json)")
             }
             
-        }*/
+        }
         
+        print("trying to get locations")
+        //InstagramClient.sharedInstance.getNearByPlaces("43.6426", lng: "79.3871")
+
         return true
     }
 
