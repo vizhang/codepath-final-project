@@ -16,8 +16,7 @@ let consumerkey = "8f8f7c19b14c4a548330197a139d8ce8"
 let consumerSecret = "cbf0c4ebf65940519ad3f615e9521523"
 let baseUrl = "https://api.instagram.com"
 
-class InstagramClient {
-    
+class InstagramClient : BDBOAuth1RequestOperationManager {
     
     var loginCompletion :((user: User?, error: NSError?) ->())?
     var accessToken : String?;
@@ -29,16 +28,24 @@ class InstagramClient {
         return Static.instance
     }
     
-    init() {
+    /*
+    func setAccessToken (accessToken: NSString) {
         
     }
     
-    
-    
-    func loginWithCompletion (completion: (user: User?, error: NSError?) ->()){
-        UIApplication.sharedApplication().openURL(NSURL(string: "\(baseUrl)/oauth/authorize?client_id=\(consumerkey)&redirect_uri=columbus://oauth&response_type=token")!)
+    init() {
         
+    }
+    */
+    
+        func loginWithCompletion (completion: (user: User?, error: NSError?) ->()){
         loginCompletion = completion
+
+        //Clean things up before we get going
+        //Fetch request token and redirect to authorization page
+        //InstagramClient.sharedInstance.requestSerializer.removeAccessToken()
+        
+        UIApplication.sharedApplication().openURL(NSURL(string: "\(baseUrl)/oauth/authorize?client_id=\(consumerkey)&redirect_uri=columbus://oauth&response_type=token")!)
         
         /*InstagramClient.sharedInstance.fetchRequestTokenWithPath("/oauth/authorize", method: "GET", callbackURL: NSURL(string: "columbus://oauth"), scope: nil,
             success: {
@@ -79,6 +86,7 @@ class InstagramClient {
     func sendRequest(url: String, method: String,var  params: [String: String], callback: (Bool, AnyObject) -> Void) {
         let manager = AFHTTPRequestOperationManager()
         let fullUrl = baseUrl + url;
+        print("full URL: \(fullUrl)")
         params["access_token"] = self.accessToken
         switch(method) {
         case "GET":

@@ -43,18 +43,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
-        print("reached back")
+        //Should check if path is columbus://oauth but for now assume it is the case
         
-        /*
-        if (url.host == "oauth-callback") {
-            if (url.path!.hasPrefix("/twitter")){
-                OAuth1Swift.handleOpenURL(url)
-            }
-            if ( url.path!.hasPrefix("/github" )){
-                OAuth2Swift.handleOpenURL(url)
-            }
-        }
-        */
+        print("came back from Instagram mobile web")
+        let urlString = String(url)
+        let urlArray = urlString.characters.split{$0 == "="}.map(String.init)
+        //print("\(urlArray[1])")
+        InstagramClient.sharedInstance.accessToken = urlArray[1]
+
+        print("trying to get locations")
+        InstagramClient.sharedInstance.getNearByPlaces("48.858844", lng: "2.294351")
         
         
         return true
