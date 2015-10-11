@@ -10,9 +10,13 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var bioLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -32,4 +36,8 @@ class ProfileViewController: UIViewController {
     }
     */
 
+    @IBAction func onSignOutPressed(sender: AnyObject) {
+        print("sign out pressed")
+        
+    }
 }

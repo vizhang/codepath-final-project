@@ -18,35 +18,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //Get Log-out notifications
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         
         //If user is logged in, take them directly  to discover page
         //Check if there is a current user
-        /*
+        
         if User.currentUser != nil {
-            //force it to go into hamburgers
+            //force it to go into swipeable view
+            //for now, lets just go to discover page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
-            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
-            
-            menuViewController.hamburgerViewController = hamburgerViewController
-            hamburgerViewController.menuViewController = menuViewController
-            window?.rootViewController = hamburgerViewController //force the change
+            let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
+            window?.rootViewController = nav //force the change
             
         }
         else {
-            println("Not detecting current user.")
+            print("Not detecting current user.")
             
         }
-        
-        */
         
         return true
     }
 
     func userDidLogout() {
-        //var vc = storyboard.instantiateInitialViewController() as? UIViewController
-        //window?.rootViewController = vc
+        let vc = storyboard.instantiateInitialViewController() as UIViewController!
+        window?.rootViewController = vc
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -83,9 +78,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Set Current User
         InstagramClient.sharedInstance.getCurrentUser() { (success, json) ->
             Void in
-            if (success) {
-                //var user =
-                print("user info: \(json)")
+            if success {
+                let user = User(dictionary: json)
+                User.currentUser = user
+                
             } else {
                 //failed
                 print("failed to get user info: \(json)")
@@ -93,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        print("trying to get locations")
+        //print("trying to get locations")
         //InstagramClient.sharedInstance.getNearByPlaces("43.6426", lng: "79.3871")
 
         return true
