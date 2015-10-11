@@ -38,8 +38,8 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
     }
     */
     
-        func loginWithCompletion (completion: (user: User?, error: NSError?) ->()){
-        loginCompletion = completion
+    func loginWithCompletion (completion: (user: User?, error: NSError?) ->()){
+        //loginCompletion = completion
 
         //Clean things up before we get going
         //Fetch request token and redirect to authorization page
@@ -91,6 +91,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
         sendRequest(url, method: "GET", params: params, callback: {(success, json) -> Void in
             if(success) {
                 callback(success, json as! NSArray);
+
             } else {
                 callback(success, []);
             }
@@ -105,7 +106,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
             if(success) {
                 print("successfully fetched");
             } else {
-                print("Error while fetching");
+                print("Error while fetching: \(json)");
             }
         });
     }
@@ -118,6 +119,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
         print("full URL: \(fullUrl)")
 
         params["access_token"] = self.accessToken
+        print("Params: \(params)")
         switch(method) {
         case "GET":
             manager.GET(fullUrl, parameters: params, success: { (operation, responseObject) -> Void in

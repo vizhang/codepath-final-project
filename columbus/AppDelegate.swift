@@ -52,8 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InstagramClient.sharedInstance.accessToken = urlArray[1]
 
         print("trying to get locations")
-        InstagramClient.sharedInstance.getNearByPlaces("48.858844", lng: "2.294351")
-        
+        //InstagramClient.sharedInstance.getNearByPlaces("43.6426", lng: "79.3871")
+        InstagramClient.sharedInstance.getNearByMediaItems("43.6426", lng: "79.3871") { (success, json) -> Void in
+            if success {
+                print("success")
+            } else {
+                print("failed")
+            }
+            
+        }
         
         return true
     }
