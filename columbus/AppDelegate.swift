@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
         print("reached back")
+        
+        /*
         if (url.host == "oauth-callback") {
             if (url.path!.hasPrefix("/twitter")){
                 OAuth1Swift.handleOpenURL(url)
@@ -53,6 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 OAuth2Swift.handleOpenURL(url)
             }
         }
+        */
+        
+        
         return true
     }
 

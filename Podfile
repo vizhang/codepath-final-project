@@ -1,6 +1,6 @@
 platform :ios, "8.0"
-use_frameworks!
 
 pod "AFNetworking"
-pod 'AeroGearOAuth2'
+pod "BDBOAuth1Manager"
+
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40E01438BB4B931A406F8E4B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5A6C63A0C378F9E1612380 /* libPods.a */; };
 		4B1B0F6B1BC299FD00485507 /* InstagramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1B0F6A1BC299FD00485507 /* InstagramClient.swift */; settings = {ASSET_TAGS = (); }; };
 		4B1B0F721BC29AA400485507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1B0F711BC29AA400485507 /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		9061010F1BB9E45A00AFAB6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061010E1BB9E45A00AFAB6E /* AppDelegate.swift */; };
@@ -15,7 +16,6 @@
 		906101161BB9E45A00AFAB6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 906101151BB9E45A00AFAB6E /* Images.xcassets */; };
 		906101191BB9E45A00AFAB6E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906101171BB9E45A00AFAB6E /* LaunchScreen.xib */; };
 		906101251BB9E45A00AFAB6E /* columbusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906101241BB9E45A00AFAB6E /* columbusTests.swift */; };
-		9508E4EF4D2533ACCED35F5A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72A28882A71D9B306956814 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,8 @@
 		9061011E1BB9E45A00AFAB6E /* columbusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = columbusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		906101231BB9E45A00AFAB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906101241BB9E45A00AFAB6E /* columbusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = columbusTests.swift; sourceTree = "<group>"; };
-		C72A28882A71D9B306956814 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		906B7B661BCAC3130072E2C7 /* columbus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "columbus-Bridging-Header.h"; sourceTree = "<group>"; };
+		AE5A6C63A0C378F9E1612380 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB07DC82C8F7B5F2389700AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9508E4EF4D2533ACCED35F5A /* Pods.framework in Frameworks */,
+				40E01438BB4B931A406F8E4B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +93,7 @@
 		56E8E8A5CF14D00D18008291 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C72A28882A71D9B306956814 /* Pods.framework */,
+				AE5A6C63A0C378F9E1612380 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,6 +138,7 @@
 				906101151BB9E45A00AFAB6E /* Images.xcassets */,
 				906101171BB9E45A00AFAB6E /* LaunchScreen.xib */,
 				9061010C1BB9E45A00AFAB6E /* Supporting Files */,
+				906B7B661BCAC3130072E2C7 /* columbus-Bridging-Header.h */,
 			);
 			path = columbus;
 			sourceTree = "<group>";
@@ -178,7 +180,6 @@
 				906101061BB9E45A00AFAB6E /* Frameworks */,
 				906101071BB9E45A00AFAB6E /* Resources */,
 				D2E46F1D479957B0AE8D89E1 /* Copy Pods Resources */,
-				5F50D0F689C8A6279896BCC8 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -266,21 +267,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5F50D0F689C8A6279896BCC8 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D2E46F1D479957B0AE8D89E1 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -457,7 +443,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victor.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "columbus/columbus-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -472,7 +458,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victor.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "columbus/columbus-Bridging-Header.h";
 			};
 			name = Release;
 		};
