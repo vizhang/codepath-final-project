@@ -61,7 +61,28 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
     }
     
     
-    func getNearByPlaces (lat : String, lng: String) {
+    func getNearByMediaItems(lat: String, lng: String, callback: (Bool, NSDictionary)->Void) {
+        getNearByPlaces(lat, lng: lng, callback: {(success, locationList) -> Void in
+            if (success) {
+                for var index = 0; index < locationList.count ; ++index{
+                    
+                    let eachLocation = locationList[index] as! NSDictionary
+                    let locationId = eachLocation["id"] as! String
+                    self.getRecentMedia(locationId, callback: {(success, mediaList) -> Void in
+                        if (success) {
+                            print("fetched the media list");
+                            print(mediaList)
+                        } else {
+                            print("error while fetching");
+                        }
+                    })
+                }
+            }
+        });
+    }
+    
+    
+    func getNearByPlaces (lat : String, lng: String, callback: (Bool, NSArray)-> Void) {
         let url = "/v1/locations/search";
 
         var params: [String:String] = [:];
@@ -69,24 +90,33 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
         params["lng"] = lng;
         sendRequest(url, method: "GET", params: params, callback: {(success, json) -> Void in
             if(success) {
-                print("successfully fetched");
+                callback(success, json as! NSArray);
             } else {
-                print("Error while fetching");
+                callback(success, []);
             }
         });
 
     }
     
     
-    func getRecentMedia() {
-        let url = "/locations/location-id/media/recent"
+    func getRecentMedia(locationId: String, callback: (Bool, NSArray)-> Void) {
+        let url = "/locations/\(locationId)/media/recent";
+        sendRequest(url, method: "GET", params: [:], callback: {(success, json) -> Void in
+            if(success) {
+                print("successfully fetched");
+            } else {
+                print("Error while fetching");
+            }
+        });
     }
     
     
     func sendRequest(url: String, method: String,var  params: [String: String], callback: (Bool, AnyObject) -> Void) {
         let manager = AFHTTPRequestOperationManager()
         let fullUrl = baseUrl + url;
+
         print("full URL: \(fullUrl)")
+
         params["access_token"] = self.accessToken
         switch(method) {
         case "GET":
