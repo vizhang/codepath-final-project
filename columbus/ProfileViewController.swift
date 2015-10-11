@@ -17,7 +17,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        let user = User.currentUser
+        if let pp = user?.profile_picture {
+            profileImageView.setImageWithURL( NSURL(string: pp))
+        }
+        usernameLabel.text = user?.username
+        bioLabel.text = user?.bio
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +44,7 @@ class ProfileViewController: UIViewController {
 
     @IBAction func onSignOutPressed(sender: AnyObject) {
         print("sign out pressed")
-        
+        User.currentUser?.logout()
+
     }
 }

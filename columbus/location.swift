@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Location{
+class Location: NSObject {
     var lat: String?
     var lng: String?
     var name: String?

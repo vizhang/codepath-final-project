@@ -8,12 +8,26 @@
 
 import UIKit
 
-class FavouritesViewController: UIViewController {
+class FavouritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var noFavs1Label: UILabel!
+    @IBOutlet weak var noFavs2Label: UILabel!
+    
+    var locations : [Location]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let numberOfLocation = locations?.count ?? 0
+        if numberOfLocation > 0 {
+            noFavs1Label.hidden = true
+            noFavs2Label.hidden = true
+        } else {
+            noFavs1Label.hidden = false
+            noFavs2Label.hidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +35,17 @@ class FavouritesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return locations?.count ?? 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell", forIndexPath: indexPath) as! LocationTableViewCell
+        //cell.tweet = self.tweets![indexPath.row]
+        return cell
+    }
+    
     /*
     // MARK: - Navigation
 

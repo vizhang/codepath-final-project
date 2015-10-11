@@ -24,10 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Check if there is a current user
         
         if User.currentUser != nil {
+            //Grab Access Token from NSUserDefault
+            InstagramClient.sharedInstance.accessToken = NSUserDefaults.standardUserDefaults().objectForKey("currentAccessToken") as? String
+            
             //force it to go into swipeable view
             //for now, lets just go to discover page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let nav = storyboard.instantiateViewControllerWithIdentifier("DiscoverViewController")
+
+            //let nav = storyboard.instantiateViewControllerWithIdentifier("FavouritesViewController")
             window?.rootViewController = nav //force the change
             
         }
@@ -40,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func userDidLogout() {
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "currentAccessToken")
         let vc = storyboard.instantiateInitialViewController() as UIViewController!
         window?.rootViewController = vc
     }
@@ -74,13 +80,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let urlString = String(url)
         let urlArray = urlString.characters.split{$0 == "="}.map(String.init)
         InstagramClient.sharedInstance.accessToken = urlArray[1]
-
+        NSUserDefaults.standardUserDefaults().setObject(urlArray[1], forKey: "currentAccessToken")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    
         //Set Current User
         InstagramClient.sharedInstance.getCurrentUser() { (success, json) ->
             Void in
             if success {
+                print("Got User Profile Back!")
                 let user = User(dictionary: json)
                 User.currentUser = user
+                
+                print("Moving to Discover Page")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
+                self.window?.rootViewController = nav //force the change
                 
             } else {
                 //failed
@@ -88,10 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         }
-        
-        //print("trying to get locations")
-        //InstagramClient.sharedInstance.getNearByPlaces("43.6426", lng: "79.3871")
-
         return true
     }
 

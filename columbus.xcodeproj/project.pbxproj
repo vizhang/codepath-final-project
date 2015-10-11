@@ -21,6 +21,7 @@
 		906B7B701BCAD86A0072E2C7 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B6F1BCAD86A0072E2C7 /* FavouritesViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		906B7B721BCAD8710072E2C7 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B711BCAD8710072E2C7 /* DiscoverViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		906B7B741BCAD8AB0072E2C7 /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B731BCAD8AB0072E2C7 /* SwipeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		906B7B771BCB04190072E2C7 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B761BCB04190072E2C7 /* LocationTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		906B7B6F1BCAD86A0072E2C7 /* FavouritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		906B7B711BCAD8710072E2C7 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		906B7B731BCAD8AB0072E2C7 /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
+		906B7B761BCB04190072E2C7 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		AE5A6C63A0C378F9E1612380 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB07DC82C8F7B5F2389700AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +149,7 @@
 			children = (
 				4B1B0F741BC29D5400485507 /* viewControllers */,
 				4B1B0F6C1BC29A0A00485507 /* lib */,
+				906B7B751BCB03FD0072E2C7 /* views */,
 				4B1B0F671BC298B900485507 /* models */,
 				9061010E1BB9E45A00AFAB6E /* AppDelegate.swift */,
 				906101121BB9E45A00AFAB6E /* Main.storyboard */,
@@ -181,6 +184,14 @@
 				906101231BB9E45A00AFAB6E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		906B7B751BCB03FD0072E2C7 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				906B7B761BCB04190072E2C7 /* LocationTableViewCell.swift */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +335,7 @@
 				906B7B6C1BCAD6F40072E2C7 /* ProfileViewController.swift in Sources */,
 				4BB9245D1BCAE37B0008866B /* location.swift in Sources */,
 				906B7B741BCAD8AB0072E2C7 /* SwipeViewController.swift in Sources */,
+				906B7B771BCB04190072E2C7 /* LocationTableViewCell.swift in Sources */,
 				4B1B0F6B1BC299FD00485507 /* InstagramClient.swift in Sources */,
 				9061010F1BB9E45A00AFAB6E /* AppDelegate.swift in Sources */,
 				906B7B721BCAD8710072E2C7 /* DiscoverViewController.swift in Sources */,

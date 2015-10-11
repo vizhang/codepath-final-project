@@ -64,7 +64,6 @@ class User: NSObject {
     func logout() {
         //Clear current user
         User.currentUser = nil
-        //InstagramClient.sharedInstance.requestSerializer.removeAccessToken() //removes permissions
         
         //NSUserNotification Center is like post office
         NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil) //tells anyone who is interested this happened
