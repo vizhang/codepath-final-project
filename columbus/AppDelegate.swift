@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //force it to go into swipeable view
             //for now, lets just go to discover page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
+            let nav = storyboard.instantiateViewControllerWithIdentifier("DiscoverViewController")
             window?.rootViewController = nav //force the change
             
         }

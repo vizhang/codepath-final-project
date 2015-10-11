@@ -11,5 +11,16 @@ import Foundation
 
 class Location{
     var lat: String?
-    var long: String?
+    var lng: String?
+    var name: String?
+    
+    init(lat : String, lng: String) {
+        self.lat = lat
+        self.lng = lng
+    }
+    init(lat: String, lng: String, name: String) {
+        self.lat = lat
+        self.lng = lng
+        self.name = name
+    }
 }

@@ -61,7 +61,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
     }
     
     
-    func getNearByMediaItems(lat: String, lng: String, callback: (Bool, NSArray)->Void) {
+    func getNearByMediaItems(location: Location, callback: (Bool, NSArray)->Void) {
         var allMediaItem = NSMutableArray()
         var totalCount = 0
         var errors = false
@@ -77,16 +77,15 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
             }
         }
         
-        getNearByPlaces(lat, lng: lng, callback: {(success, locationList) -> Void in
+        getNearByPlaces(location, callback: {(success, locationList) -> Void in
             if (success) {
                 for var index = 0; index < locationList.count ; ++index {
                     totalCount++
                     
                     
                     let eachLocation = locationList[index] as! NSDictionary
-                    let locationName = eachLocation["name"] as! String
                     let locationDetails = NSMutableDictionary()
-                    locationDetails.setValue(locationName, forKey: "locationName")
+                    locationDetails.setValue(Location(lat: eachLocation["latitude"] as! String, lng: eachLocation["longitude"] as! String, name: eachLocation["name"] as! String), forKey: "location")
                     let locationId = eachLocation["id"] as! String
                     self.getRecentMedia(locationId, callback: {(success, mediaList) -> Void in
                         totalCount--
@@ -114,12 +113,12 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
     
     
     
-    func getNearByPlaces (lat : String, lng: String, callback: (Bool, NSArray)-> Void) {
+    func getNearByPlaces (location: Location, callback: (Bool, NSArray)-> Void) {
         let url = "/v1/locations/search"
 
         var params: [String:String] = [:]
-        params["lat"] = lat
-        params["lng"] = lng
+        params["lat"] = location.lat
+        params["lng"] = location.lng
         sendRequest(url, method: "GET", params: params, callback: {(success, json) -> Void in
             if(success) {
                 callback(success, json as! NSArray)
