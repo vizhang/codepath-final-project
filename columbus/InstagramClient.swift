@@ -20,12 +20,17 @@ class InstagramClient {
     
     
     var loginCompletion :((user: User?, error: NSError?) ->())?
+    var accessToken : String?;
     
     class var sharedInstance: InstagramClient {
         struct Static {
             static let instance = InstagramClient()
         }
         return Static.instance
+    }
+    
+    init() {
+        
     }
     
     
@@ -48,77 +53,51 @@ class InstagramClient {
         }*/
     }
     
-    func openURL (url: NSURL) {
-        /*InstagramClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query),
-            success: {
-                (accessToken: BDBOAuth1Credential!) -> Void in
-                print("got the access token")
-                InstagramClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
-                
-                InstagramClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                    print("It verified")
-                    print("user \(response)")
-                    let loggedInUser = User(dictionary: response as! NSDictionary)
-                    User.currentUser = loggedInUser
-                    self.loginCompletion?(user: loggedInUser, error: nil)
-                    }, failure: {
-                        (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                        print("Could not get the user")
-                        self.loginCompletion?(user: nil, error: error)
-                })
-                
-            }) { (error: NSError!) -> Void in
-                self.loginCompletion?(user: nil, error: error)
-        }*/
-        
-    }
-    /*func fetchTweets(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
-        TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            let allTweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-            completion(tweets: allTweets, error: nil)
-            }, failure: {
-                (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                print(error)
-                print("Could not get the tweets")
-                completion(tweets: nil, error: error)
-                
-        })
-    }
     
-    func postNewTweet(params: NSDictionary?, completion: (response: AnyObject?, error: NSError?) ->()) {
-        TwitterClient.sharedInstance.POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            completion(response: response, error: nil)
-            }, failure: {
-                (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                print(error)
-                print("Could not save the tweets")
-                completion(response: nil, error: error)
-                
-        })
+    func getNearByPlaces (lat : String, lng: String) {
+        let url = "/v1/locations/search";
+
+        var params: [String:String] = [:];
+        params["lat"] = lat;
+        params["lng"] = lng;
+        sendRequest(url, method: "GET", params: params, callback: {(success, json) -> Void in
+            if(success) {
+                print("successfully fetched");
+            } else {
+                print("Error while fetching");
+            }
+        });
+
     }
     
     
-    func reTweet(params: NSDictionary?, completion: (response: AnyObject?, error: NSError?) ->()) {
-        let tweetId = params!["id"] as! String
-        let url = "/1.1/statuses/retweet/\(tweetId).json"
-        TwitterClient.sharedInstance.POST(url, parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            print("successfully retweeted")
-            completion(response: response, error: nil)
-            }, failure: {
-                (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                completion(response: nil, error: error)
-                
-        })
+    func getRecentMedia() {
+        let url = "/locations/location-id/media/recent"
     }
     
-    func favorite(params: NSDictionary?, completion: (response: AnyObject?, error: NSError?) ->()){
-        TwitterClient.sharedInstance.POST("/1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            completion(response: response, error: nil)
-            }, failure: {
-                (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                completion(response: nil, error: error)
-                
-        })
-    }*/
+    
+    func sendRequest(url: String, method: String,var  params: [String: String], callback: (Bool, AnyObject) -> Void) {
+        let manager = AFHTTPRequestOperationManager()
+        let fullUrl = baseUrl + url;
+        params["access_token"] = self.accessToken
+        switch(method) {
+        case "GET":
+            manager.GET(fullUrl, parameters: params, success: { (operation, responseObject) -> Void in
+                if let results = responseObject["data"]  {
+                    callback(true, results!)
+                } else {
+                    callback(false, responseObject);
+                }
+            }, failure: { (operation, requestError) -> Void in
+                    callback(false, requestError);
+            })
+        default:
+            print("The method is not supported");
+        }
+    }
+    
+    
+
+    
     
 }
