@@ -143,6 +143,22 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
         });
     }
     
+    func getCurrentUser(callback: (Bool, NSDictionary)-> Void) {
+        getUser("self", callback: callback)
+    }
+    
+    func getUser(userid: String, callback: (Bool, NSDictionary)-> Void){
+        let url = "/users/\(userid)";
+        sendRequest(url, method: "GET", params: [:], callback: {(success, json) -> Void in
+            if(success) {
+                var json = json as! NSDictionary
+                callback(success, json["data"] as! NSDictionary);
+            } else {
+                callback(success, []);
+            }
+        });
+    }
+    
     
     func sendRequest(url: String, method: String,var  params: [String: String], callback: (Bool, AnyObject) -> Void) {
         let manager = AFHTTPRequestOperationManager()
@@ -167,6 +183,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
             print("The method is not supported");
         }
     }
+    
     
     
 

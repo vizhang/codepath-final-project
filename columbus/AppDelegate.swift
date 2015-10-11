@@ -53,7 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         print("trying to get locations")
         //InstagramClient.sharedInstance.getNearByPlaces("43.6426", lng: "79.3871")
-        InstagramClient.sharedInstance.getNearByMediaItems("43.6426", lng: "79.3871") { (success, json) -> Void in
+        
+        InstagramClient.sharedInstance.getCurrentUser { (success, user) -> Void in
+            print(user);
+        }
+/*        InstagramClient.sharedInstance.getNearByMediaItems("43.6426", lng: "79.3871") { (success, json) -> Void in
             if success {
                 print("success")
                 print(json)
@@ -61,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("failed")
             }
             
-        }
+        }*/
         
         return true
     }

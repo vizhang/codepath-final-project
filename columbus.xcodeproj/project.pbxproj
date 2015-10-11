@@ -10,6 +10,7 @@
 		40E01438BB4B931A406F8E4B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5A6C63A0C378F9E1612380 /* libPods.a */; };
 		4B1B0F6B1BC299FD00485507 /* InstagramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1B0F6A1BC299FD00485507 /* InstagramClient.swift */; settings = {ASSET_TAGS = (); }; };
 		4B1B0F721BC29AA400485507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1B0F711BC29AA400485507 /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		4BB9245D1BCAE37B0008866B /* location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9245C1BCAE37B0008866B /* location.swift */; settings = {ASSET_TAGS = (); }; };
 		9061010F1BB9E45A00AFAB6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061010E1BB9E45A00AFAB6E /* AppDelegate.swift */; };
 		906101111BB9E45A00AFAB6E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906101101BB9E45A00AFAB6E /* LoginViewController.swift */; };
 		906101141BB9E45A00AFAB6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 906101121BB9E45A00AFAB6E /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		4B1B0F6A1BC299FD00485507 /* InstagramClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramClient.swift; sourceTree = "<group>"; };
 		4B1B0F711BC29AA400485507 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4BB9245C1BCAE37B0008866B /* location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = location.swift; sourceTree = "<group>"; };
 		63F2B5850C5B7E2E95865752 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		906101091BB9E45A00AFAB6E /* columbus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = columbus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9061010D1BB9E45A00AFAB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				4B1B0F711BC29AA400485507 /* User.swift */,
+				4BB9245C1BCAE37B0008866B /* location.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				4B1B0F721BC29AA400485507 /* User.swift in Sources */,
 				906101111BB9E45A00AFAB6E /* LoginViewController.swift in Sources */,
 				906B7B6C1BCAD6F40072E2C7 /* ProfileViewController.swift in Sources */,
+				4BB9245D1BCAE37B0008866B /* location.swift in Sources */,
 				906B7B741BCAD8AB0072E2C7 /* SwipeViewController.swift in Sources */,
 				4B1B0F6B1BC299FD00485507 /* InstagramClient.swift in Sources */,
 				9061010F1BB9E45A00AFAB6E /* AppDelegate.swift in Sources */,

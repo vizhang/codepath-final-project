@@ -14,6 +14,8 @@ var _currentUser : User?
 class User {
     var name: String?
     var dictionary : NSDictionary?
+    var location: Location
+
     
     init (dictionary: NSDictionary) {
         self.dictionary = dictionary
