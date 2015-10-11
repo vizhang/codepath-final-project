@@ -61,25 +61,57 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
     }
     
     
-    func getNearByMediaItems(lat: String, lng: String, callback: (Bool, NSDictionary)->Void) {
+    func getNearByMediaItems(lat: String, lng: String, callback: (Bool, NSArray)->Void) {
+        var allMediaItem = NSMutableArray();
+        var totalCount = 0;
+        var errors = false;
+        var iterationDone = false;
+        
+        func afterFetch() {
+            if totalCount == 0  && iterationDone{
+                if(errors) {
+                    callback(false, [])
+                } else {
+                    callback(true, allMediaItem)
+                }
+            }
+        }
+        
         getNearByPlaces(lat, lng: lng, callback: {(success, locationList) -> Void in
             if (success) {
                 for var index = 0; index < locationList.count ; ++index{
+                    totalCount++;
+                    
                     
                     let eachLocation = locationList[index] as! NSDictionary
+                    let locationName = eachLocation["name"] as! String
+                    let locationDetails = NSMutableDictionary();
+                    locationDetails.setValue(locationName, forKey: "locationName")
                     let locationId = eachLocation["id"] as! String
                     self.getRecentMedia(locationId, callback: {(success, mediaList) -> Void in
+                        totalCount--
                         if (success) {
                             print("fetched the media list");
-                            print(mediaList)
+                            locationDetails.setValue(mediaList, forKey: "mediaItem")
+                            allMediaItem.addObject(locationDetails)
                         } else {
                             print("error while fetching");
+                            errors = true
                         }
+                        afterFetch()
                     })
                 }
+                iterationDone = true
+            } else {
+                errors = true
+                iterationDone = true
+                afterFetch()
             }
         });
+        
+        
     }
+    
     
     
     func getNearByPlaces (lat : String, lng: String, callback: (Bool, NSArray)-> Void) {
@@ -101,12 +133,12 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
     
     
     func getRecentMedia(locationId: String, callback: (Bool, NSArray)-> Void) {
-        let url = "/locations/\(locationId)/media/recent";
+        let url = "/v1/locations/\(locationId)/media/recent";
         sendRequest(url, method: "GET", params: [:], callback: {(success, json) -> Void in
             if(success) {
-                print("successfully fetched");
+                callback(success, json as! NSArray);
             } else {
-                print("Error while fetching: \(json)");
+                callback(success, []);
             }
         });
     }

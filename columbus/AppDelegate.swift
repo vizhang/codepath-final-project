@@ -56,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InstagramClient.sharedInstance.getNearByMediaItems("43.6426", lng: "79.3871") { (success, json) -> Void in
             if success {
                 print("success")
+                print(json)
             } else {
                 print("failed")
             }
