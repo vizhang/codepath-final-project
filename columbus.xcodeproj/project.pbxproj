@@ -16,6 +16,10 @@
 		906101161BB9E45A00AFAB6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 906101151BB9E45A00AFAB6E /* Images.xcassets */; };
 		906101191BB9E45A00AFAB6E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906101171BB9E45A00AFAB6E /* LaunchScreen.xib */; };
 		906101251BB9E45A00AFAB6E /* columbusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906101241BB9E45A00AFAB6E /* columbusTests.swift */; };
+		906B7B6C1BCAD6F40072E2C7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B6B1BCAD6F40072E2C7 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		906B7B701BCAD86A0072E2C7 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B6F1BCAD86A0072E2C7 /* FavouritesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		906B7B721BCAD8710072E2C7 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B711BCAD8710072E2C7 /* DiscoverViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		906B7B741BCAD8AB0072E2C7 /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B7B731BCAD8AB0072E2C7 /* SwipeViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,10 @@
 		906101231BB9E45A00AFAB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906101241BB9E45A00AFAB6E /* columbusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = columbusTests.swift; sourceTree = "<group>"; };
 		906B7B661BCAC3130072E2C7 /* columbus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "columbus-Bridging-Header.h"; sourceTree = "<group>"; };
+		906B7B6B1BCAD6F40072E2C7 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		906B7B6F1BCAD86A0072E2C7 /* FavouritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		906B7B711BCAD8710072E2C7 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		906B7B731BCAD8AB0072E2C7 /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		AE5A6C63A0C378F9E1612380 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB07DC82C8F7B5F2389700AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +94,10 @@
 			isa = PBXGroup;
 			children = (
 				906101101BB9E45A00AFAB6E /* LoginViewController.swift */,
+				906B7B6B1BCAD6F40072E2C7 /* ProfileViewController.swift */,
+				906B7B6F1BCAD86A0072E2C7 /* FavouritesViewController.swift */,
+				906B7B711BCAD8710072E2C7 /* DiscoverViewController.swift */,
+				906B7B731BCAD8AB0072E2C7 /* SwipeViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -306,8 +318,12 @@
 			files = (
 				4B1B0F721BC29AA400485507 /* User.swift in Sources */,
 				906101111BB9E45A00AFAB6E /* LoginViewController.swift in Sources */,
+				906B7B6C1BCAD6F40072E2C7 /* ProfileViewController.swift in Sources */,
+				906B7B741BCAD8AB0072E2C7 /* SwipeViewController.swift in Sources */,
 				4B1B0F6B1BC299FD00485507 /* InstagramClient.swift in Sources */,
 				9061010F1BB9E45A00AFAB6E /* AppDelegate.swift in Sources */,
+				906B7B721BCAD8710072E2C7 /* DiscoverViewController.swift in Sources */,
+				906B7B701BCAD86A0072E2C7 /* FavouritesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
