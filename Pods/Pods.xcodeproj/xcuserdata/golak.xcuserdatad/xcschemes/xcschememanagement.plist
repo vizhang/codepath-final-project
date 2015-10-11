@@ -9,7 +9,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BDBOAuth1Manager.xcscheme</key>
+		<key>AeroGearHttp.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>AeroGearOAuth2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>9312F5CC3D31843EF6C5D8A45F513F98</key>
+		<key>7D8A55DB4B99692A51EBB81D4F3175DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A06F2726994C3C976BE275AFDABA9F89</key>
+		<key>969F3D9BE373A359EC65141D71D10C31</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF7CF6369CC2876F20028478F7450617</key>
+		<key>B7A4A188A86BFF8D809DEA6F820E11CE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E7B360F5CEFE2F8270EC01B160B3C29F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

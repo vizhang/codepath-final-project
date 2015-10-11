@@ -7,30 +7,35 @@
 //
 
 import Foundation
+import UIKit
+
+
+
 
 let consumerkey = "8f8f7c19b14c4a548330197a139d8ce8"
 let consumerSecret = "cbf0c4ebf65940519ad3f615e9521523"
 let baseUrl = "https://api.instagram.com"
 
-class InstagramClient : BDBOAuth1RequestOperationManager{
+class InstagramClient {
     
     
     var loginCompletion :((user: User?, error: NSError?) ->())?
     
     class var sharedInstance: InstagramClient {
         struct Static {
-            static let instance = InstagramClient(baseURL: NSURL(string: baseUrl), consumerKey: consumerkey, consumerSecret: consumerSecret)
+            static let instance = InstagramClient()
         }
         return Static.instance
     }
     
     
+    
     func loginWithCompletion (completion: (user: User?, error: NSError?) ->()){
+        UIApplication.sharedApplication().openURL(NSURL(string: "\(baseUrl)/oauth/authorize?client_id=\(consumerkey)&redirect_uri=columbus://oauth&response_type=token")!)
+        
         loginCompletion = completion
         
-        InstagramClient.sharedInstance.requestSerializer.removeAccessToken()
-        print("make call to authorize");
-        InstagramClient.sharedInstance.fetchRequestTokenWithPath("/oauth/authorize", method: "GET", callbackURL: NSURL(string: "columbus://oauth"), scope: nil,
+        /*InstagramClient.sharedInstance.fetchRequestTokenWithPath("/oauth/authorize", method: "GET", callbackURL: NSURL(string: "columbus://oauth"), scope: nil,
             success: {
                 (requestToken: BDBOAuth1Credential!) -> Void in
                 print("got the requestToken")
@@ -40,11 +45,11 @@ class InstagramClient : BDBOAuth1RequestOperationManager{
             }) { (error: NSError!) -> Void in
                 print("Failed")
                 self.loginCompletion?(user: nil, error: error)
-        }
+        }*/
     }
     
     func openURL (url: NSURL) {
-        InstagramClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query),
+        /*InstagramClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query),
             success: {
                 (accessToken: BDBOAuth1Credential!) -> Void in
                 print("got the access token")
@@ -64,7 +69,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager{
                 
             }) { (error: NSError!) -> Void in
                 self.loginCompletion?(user: nil, error: error)
-        }
+        }*/
         
     }
     /*func fetchTweets(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
