@@ -30,6 +30,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
         
         self.mediaCollectionView.delegate = self
         self.mediaCollectionView.dataSource = self
+        self.mediaCollectionView.scrollEnabled = false
 
 
         // Do any additional setup after loading the view.

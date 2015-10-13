@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         print("Main view loaded")
         super.viewDidLoad()
+        showCurrentViewController()
 
         // Do any additional setup after loading the view.
     }
@@ -56,34 +57,44 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
+    
+    @IBAction func onPanGesture(sender: AnyObject) {
+        print("here is the gesture")
         let velocity = sender.velocityInView(view)
         var direction : String!
         
         if sender.state == UIGestureRecognizerState.Began {
-
+            
         } else if sender.state == UIGestureRecognizerState.Changed {
         } else if sender.state == UIGestureRecognizerState.Ended {
             //UIView.animateWithDuration(0.3, animations: {
-                if velocity.x > 0 {
-                    direction = "right"
-                } else {
-                    direction = "left"
-                }
-                if velocity.y > 0 {
-                    direction = "top"
-                } else {
-                    direction = "bottom"
-                }
-                let newController = self.getNewController(direction)
-                if newController == newController {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    storyboard.instantiateViewControllerWithIdentifier(newController!)
-                }
-                self.view.layoutIfNeeded()
-           // })
+            if velocity.x > 0 {
+                direction = "right"
+            } else {
+                direction = "left"
+            }
+            if velocity.y > 0 {
+                direction = "top"
+            } else {
+                direction = "bottom"
+            }
+            let newController = self.getNewController(direction)
+            if let newController = newController {
+                currentViewController = newController
+                self.showCurrentViewController();
+            }
+            self.view.layoutIfNeeded()
+            // })
         }
     }
+    
+
+    func showCurrentViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(currentViewController)
+        self.contentViewController = vc
+    }
+    
     
     func getNewController(direction : String) -> String? {
         var newViewController : String?
@@ -127,6 +138,8 @@ class MainViewController: UIViewController {
                 print("no where to go")
             }
         }
+        
+        
         return newViewController
     }
     
