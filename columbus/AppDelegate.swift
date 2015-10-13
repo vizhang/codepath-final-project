@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        GMSServices.provideAPIKey(GoogleClient.APIKEY)
         
         //Get Log-out notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
@@ -31,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //force it to go into swipeable view
             //for now, lets just go to discover page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            //let nav = storyboard.instantiateViewControllerWithIdentifier("DiscoverViewController")
-            let nav = storyboard.instantiateViewControllerWithIdentifier("FavouritesViewController")
+            let nav = storyboard.instantiateViewControllerWithIdentifier("DiscoverViewController")
+            //let nav = storyboard.instantiateViewControllerWithIdentifier("FavouritesViewController")
             window?.rootViewController = nav //force the change
             
         }
