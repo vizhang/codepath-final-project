@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: nil) //storyboard just parses XML
+    let accessTokenKey = "currentAccessToken"
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -25,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             //Grab Access Token from NSUserDefault
-            InstagramClient.sharedInstance.accessToken = NSUserDefaults.standardUserDefaults().objectForKey("currentAccessToken") as? String
+            InstagramClient.sharedInstance.accessToken = NSUserDefaults.standardUserDefaults().objectForKey(accessTokenKey) as? String
             
             //force it to go into swipeable view
             //for now, lets just go to discover page
@@ -44,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func userDidLogout() {
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "currentAccessToken")
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: accessTokenKey)
         let vc = storyboard.instantiateInitialViewController() as UIViewController!
         window?.rootViewController = vc
     }
@@ -79,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let urlString = String(url)
         let urlArray = urlString.characters.split{$0 == "="}.map(String.init)
         InstagramClient.sharedInstance.accessToken = urlArray[1]
-        NSUserDefaults.standardUserDefaults().setObject(urlArray[1], forKey: "currentAccessToken")
+        NSUserDefaults.standardUserDefaults().setObject(urlArray[1], forKey: accessTokenKey)
         NSUserDefaults.standardUserDefaults().synchronize()
     
         //Set Current User

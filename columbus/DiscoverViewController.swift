@@ -12,6 +12,8 @@ import CoreLocation
 class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
     var location: Location?
     let locationManager = CLLocationManager()
+    var mediaItems: NSArray?
+    var mediaItemArray : NSArray?
     
 
     @IBOutlet weak var mediaCollectionView: UICollectionView!
@@ -48,10 +50,10 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     }
     
     func getMediaInSelectedLocation () {
-        InstagramClient.sharedInstance.getNearByMediaItems(location!, callback:{  (success, MediaItems) -> Void in
-            print("recevied it all")
-            print(success)
-            print(MediaItems)
+        InstagramClient.sharedInstance.getNearByMediaItems(location!, callback:{  (success, mediaItems) -> Void in
+            self.mediaItems = mediaItems
+            self.mediaItemArray = self.createASingleListOfMedia();
+            self.mediaCollectionView.reloadData()
         });
     }
     
@@ -59,7 +61,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
         let currLocation = manager.location
         self.location = Location(lat: "(currLocation?.coordinate.latitude)",lng: "(currLocation?.coordinate.longitude)")
         //this line is for simulation. remove it
-        self.location = Location(lat: "40.7577", lng: "-73.9857")
+        self.location = Location(lat: "40.7577", lng: "73.9857")
         User.currentUser!.location = location
         getMediaInSelectedLocation()
         
@@ -77,12 +79,38 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = self.mediaCollectionView.dequeueReusableCellWithReuseIdentifier("mediaUICollectionViewCell", forIndexPath: indexPath) as! MediaItemCollectionViewCell
+        let cell = self.mediaCollectionView.dequeueReusableCellWithReuseIdentifier("mediaUICollectionViewCell", forIndexPath: indexPath) as! MediaItemCollectionViewCell
+        let item = mediaItemArray![indexPath.item] as! NSDictionary
+        let media = item["media"] as! NSDictionary
+        cell.itemNumber = indexPath.item
+
+        cell.mediaImageView.setImageWithURL(NSURL(string: media.valueForKeyPath("images.low_resolution.url") as! String))
         return cell;
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1;
+        if (self.mediaItemArray == nil) {
+            return 0;
+        }
+        return self.mediaItemArray!.count
+    }
+    
+    
+    func createASingleListOfMedia() -> NSArray{
+        let singleListMediaItem = NSMutableArray()
+        
+        for var locind = 0; locind < self.mediaItems!.count; ++locind{
+            let mediaLoc = self.mediaItems![locind]["mediaItem"] as! NSArray
+            for var mediaInd = 0; mediaInd < mediaLoc.count; mediaInd++ {
+                let mediaObj: [String:AnyObject] = [
+                    "location": self.mediaItems![locind]["location"] as! Location,
+                    "media": mediaLoc[mediaInd]
+                ]
+                singleListMediaItem.addObject(mediaObj)
+            }
+        }
+        return singleListMediaItem as NSArray
+        
     }
     
 
@@ -103,7 +131,6 @@ class MediaItemCollectionViewCell: UICollectionViewCell {
 
     
     @IBOutlet weak var mediaImageView: UIImageView!
-    var locationName: String?
-    var latlng: Location?
+    var itemNumber: Int?
     
 }

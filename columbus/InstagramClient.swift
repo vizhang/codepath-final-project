@@ -85,7 +85,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
                     
                     let eachLocation = locationList[index] as! NSDictionary
                     let locationDetails = NSMutableDictionary()
-                    locationDetails.setValue(Location(lat: eachLocation["latitude"] as! String, lng: eachLocation["longitude"] as! String, name: eachLocation["name"] as! String), forKey: "location")
+                    locationDetails.setValue(Location(lat: String(eachLocation["latitude"]), lng: String(eachLocation["longitude"]) , name: String(eachLocation["name"])), forKey: "location")
                     let locationId = eachLocation["id"] as! String
                     self.getRecentMedia(locationId, callback: {(success, mediaList) -> Void in
                         totalCount--
