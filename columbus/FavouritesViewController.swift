@@ -12,7 +12,6 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var noFavs1Label: UILabel!
     @IBOutlet weak var noFavs2Label: UILabel!
     
@@ -20,13 +19,19 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Show Some Text if you don't have any locations saved, otherwise hide it
         let numberOfLocation = locations?.count ?? 0
         if numberOfLocation > 0 {
+            print("wah")
             noFavs1Label.hidden = true
             noFavs2Label.hidden = true
+            tableView.hidden = false
         } else {
+            print("yee")
             noFavs1Label.hidden = false
             noFavs2Label.hidden = false
+            tableView.hidden = true
         }
     }
 
@@ -45,6 +50,12 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         //cell.tweet = self.tweets![indexPath.row]
         return cell
     }
+    
+    @IBAction func onAddPressed(sender: AnyObject) {
+        print("add new location pressed")
+        //Open modal for a new search popover
+    }
+    
     
     /*
     // MARK: - Navigation
