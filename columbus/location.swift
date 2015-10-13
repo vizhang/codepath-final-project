@@ -23,4 +23,8 @@ class Location: NSObject {
         self.lng = lng
         self.name = name
     }
+    
+    func isItSameCoord(lat: String, lng: String) -> Bool{
+        return (self.lat == lat && self.lng == lng)
+    }
 }

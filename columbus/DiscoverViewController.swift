@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import GoogleMaps
 
 class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
     var location: Location?
@@ -15,11 +16,13 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     var mediaItems: NSArray?
     var mediaItemArray : NSArray?
     
+    @IBOutlet weak var mapView: UIView!
 
     @IBOutlet weak var mediaCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Discover View Did load")
+
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
@@ -40,11 +43,13 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     func getCurrentLocation() {
         if (location == nil) {
             if #available(iOS 9.0, *) {
+                print("ios9")
                 self.locationManager.requestLocation()
             } else {
                 self.locationManager.startUpdatingLocation()
             }
         } else {
+
             getMediaInSelectedLocation()
         }
     }
@@ -59,11 +64,13 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let currLocation = manager.location
-        self.location = Location(lat: "(currLocation?.coordinate.latitude)",lng: "(currLocation?.coordinate.longitude)")
+
+        self.location = Location(lat: "\(currLocation?.coordinate.latitude)",lng: "\(currLocation?.coordinate.longitude)")
         //this line is for simulation. remove it
         self.location = Location(lat: "40.7577", lng: "73.9857")
         User.currentUser!.location = location
         getMediaInSelectedLocation()
+        self.addMapToMapView()
         
         locationManager.stopUpdatingLocation()
     }
@@ -111,6 +118,14 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
         }
         return singleListMediaItem as NSArray
         
+    }
+    
+    func addMapToMapView() {
+        let camera = GMSCameraPosition.cameraWithLatitude(Double(self.location!.lat!)!,
+            longitude: Double(self.location!.lng!)!, zoom: 6)
+        let gmapView = GMSMapView.mapWithFrame(CGRectMake(0, 0, self.mapView.bounds.width, self.mapView.bounds.height), camera: camera)
+        gmapView.myLocationEnabled = true
+        self.mapView.addSubview(gmapView)
     }
     
 
