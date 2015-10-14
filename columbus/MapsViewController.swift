@@ -10,11 +10,13 @@ import UIKit
 import CoreLocation
 import GoogleMaps
 
-class MapsViewController: UIViewController, CLLocationManagerDelegate {
+class MapsViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate, GMSMapViewDelegate {
     var location: Location?
     let locationManager = CLLocationManager()
     var mediaItems: NSArray?
     var gmapView: GMSMapView?
+    var currentTappedIndex : Int?
+    var gotLocation = false
     
     @IBOutlet weak var mapView: UIView!
     
@@ -46,13 +48,13 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate {
                 self.locationManager.startUpdatingLocation()
             }
         } else {
+            print("location is available")
             
             getMediaInSelectedLocation()
         }
     }
     
     func getMediaInSelectedLocation () {
-        print("get media in selected location in maps controller")
         InstagramClient.sharedInstance.getNearByMediaItems(location!, callback:{  (success, mediaItems) -> Void in
             self.mediaItems = mediaItems
             self.showMediaInMap()
@@ -61,6 +63,10 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let currLocation = manager.location
+        if (gotLocation) {
+            return
+        }
+        gotLocation = true
         
         self.location = Location(lat: "\(currLocation?.coordinate.latitude)",lng: "\(currLocation?.coordinate.longitude)")
         //this line is for simulation. remove it
@@ -76,18 +82,51 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate {
         for var index = 0 ; index < self.mediaItems!.count; index++ {
             let obj = self.mediaItems![index] as! NSDictionary
             
-            createImageForMarker(obj);
+            createImageForMarker(obj, currIndex: index);
             
         }
     }
     
-    func createMapMarker(lat: String, lng: String, image: UIImage) {
+    func createMapMarker(lat: String, lng: String, image: UIImage, title : String, snippet: String, currIndex: Int) {
         let position = CLLocationCoordinate2DMake(Double(lat)!, Double(lng)!)
         let marker = GMSMarker(position: position)
-        marker.title = "Hello World"
+        marker.title = title
         marker.icon = image
+        marker.snippet = snippet
+        self.gmapView?.delegate = self
         marker.map = self.gmapView
+        marker.userData = currIndex
+        //let recognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
+        //recognizer.delegate = self
+
     }
+    
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        self.currentTappedIndex = marker.userData as? Int
+        performSegueWithIdentifier("maptodetailed", sender: self)
+    }
+    
+    
+
+    
+
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "maptodetailed" {
+            let vc = segue.destinationViewController as! MediaDetailedViewController
+            print(self.currentTappedIndex)
+            
+            vc.mediaAtLoc = self.mediaItems![currentTappedIndex!] as? NSDictionary
+            print(vc.mediaAtLoc!["mediaItem"])
+        }
+    }
+    
+    /*func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }*/
+    
+    
+    
     func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
         
         let hasAlpha = false
@@ -101,14 +140,13 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func createImageForMarker(obj : NSDictionary) {
-        print(obj)
+    func createImageForMarker(obj : NSDictionary, currIndex: Int) {
         let mediaList = obj["mediaItem"] as! NSArray
         if (mediaList.count == 0) {
             return;
         }
         let media = mediaList[0] as! NSDictionary
-        
+
         if let url = NSURL(string: media.valueForKeyPath("images.low_resolution.url") as! String) {
             let request = NSURLRequest(URL: url)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
@@ -118,7 +156,13 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate {
                 
                 
                 let location = obj["location"] as! Location
-                self.createMapMarker(location.lat!, lng: location.lng!, image: locationImage)
+                let tags = (media["tags"] as! Array).joinWithSeparator("-")
+                
+                var title = media.valueForKeyPath("caption.text") as? String
+                if title == nil {
+                    title = media.valueForKeyPath("user.username") as? String
+                }
+                self.createMapMarker(location.lat!, lng: location.lng!, image: locationImage, title: title!, snippet: tags, currIndex: currIndex)
             }
         }
         
@@ -130,7 +174,7 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate {
     
     func addMapToMapView() {
         let camera = GMSCameraPosition.cameraWithLatitude(Double(self.location!.lat!)!,
-            longitude: Double(self.location!.lng!)!, zoom: 21)
+            longitude: Double(self.location!.lng!)!, zoom: 24)
         self.gmapView = GMSMapView.mapWithFrame(CGRectMake(0, 0, self.mapView.bounds.width, self.mapView.bounds.height), camera: camera)
         self.gmapView!.myLocationEnabled = true
         self.mapView.addSubview(self.gmapView!)

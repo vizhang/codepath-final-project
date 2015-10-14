@@ -9,11 +9,46 @@
 import UIKit
 
 class MediaDetailedViewController: UIViewController {
+    var mediaAtLoc: NSDictionary?
+    var startIndex: Int = -1
 
+
+    @IBOutlet weak var otherDetailsLabel: UILabel!
+
+    @IBOutlet weak var tagsLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+
+    @IBOutlet weak var mediaImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        loadTheMedia()
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func loadTheMedia() {
+        let mediaItems = mediaAtLoc!["mediaItem"] as! NSArray
+        let location = mediaAtLoc!["location"]
+        if (startIndex >= mediaItems.count) {
+            startIndex = 0
+        }
+        if (startIndex < 0) {
+            startIndex = mediaItems.count - 1
+        }
+        let currentMedia = mediaItems[startIndex] as! NSDictionary
+        
+        locationLabel.text = location!.name!
+        mediaImageView.setImageWithURL(NSURL(string: currentMedia.valueForKeyPath("images.standard_resolution.url") as! String))
+        tagsLabel.text = (currentMedia["tags"] as! Array).joinWithSeparator(", ")
+        
+        var title = currentMedia.valueForKeyPath("caption.text") as? String
+        if title == nil {
+            title = currentMedia.valueForKeyPath("user.username") as? String
+        }
+        otherDetailsLabel.text = title
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +56,23 @@ class MediaDetailedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
+
+        let velocity = sender.velocityInView(view)
+        
+        if sender.state == UIGestureRecognizerState.Began {
+            
+        } else if sender.state == UIGestureRecognizerState.Changed {
+        } else if sender.state == UIGestureRecognizerState.Ended {
+            print("pan gesture")
+            if (velocity.x > 0) {
+                startIndex++;
+            } else {
+                startIndex--;
+            }
+        }
+        loadTheMedia()
+    }
 
     /*
     // MARK: - Navigation
