@@ -67,16 +67,10 @@ class MainViewController: UIViewController {
         } else if sender.state == UIGestureRecognizerState.Changed {
         } else if sender.state == UIGestureRecognizerState.Ended {
             //UIView.animateWithDuration(0.3, animations: {
-            if velocity.x > 0 {
-                direction = "right"
-            } else {
-                direction = "left"
-            }
-            if velocity.y > 0 {
-                direction = "top"
-            } else {
-                direction = "bottom"
-            }
+            print("x:\(velocity.x)")
+            print("y:\(velocity.y)")
+            direction = getDirection(velocity)
+            print(direction)
             let newController = self.getNewController(direction)
             if let newController = newController {
                 currentViewController = newController
@@ -85,6 +79,28 @@ class MainViewController: UIViewController {
             self.view.layoutIfNeeded()
             // })
         }
+    }
+    
+    func getDirection(velocity: CGPoint) -> String {
+        var horizontal = false
+        var direction : String!
+        if (abs(velocity.x) - abs(velocity.y)) > 0 {
+            horizontal = true
+        }
+        if (horizontal) {
+            if velocity.x > 0 {
+                direction = "right"
+            } else {
+                direction = "left"
+            }
+        } else {
+            if velocity.y > 0 {
+                direction = "top"
+            } else {
+                direction = "bottom"
+            }
+        }
+        return direction
     }
     
 
@@ -99,9 +115,9 @@ class MainViewController: UIViewController {
         var newViewController : String?
         if currentViewController == "DiscoverViewController" {
             switch direction {
-            case "left":
-                newViewController = "FavouritesViewController"
             case "right":
+                newViewController = "FavouritesViewController"
+            case "left":
                 newViewController = "ProfileViewController"
             case "top":
                 newViewController = "MapsViewController"
@@ -111,7 +127,7 @@ class MainViewController: UIViewController {
         }
         if currentViewController == "FavouritesViewController" {
             switch direction {
-            case "right":
+            case "left":
                 newViewController = "DiscoverViewController"
             default:
                 print("no where to go")
@@ -119,9 +135,9 @@ class MainViewController: UIViewController {
         }
         if currentViewController == "MapsViewController" {
             switch direction {
-            case "left":
-                newViewController = "FavouritesViewController"
             case "right":
+                newViewController = "FavouritesViewController"
+            case "left":
                 newViewController = "ProfileViewController"
             case "bottom":
                 newViewController = "DiscoverViewController"
@@ -131,7 +147,7 @@ class MainViewController: UIViewController {
         }
         if currentViewController == "ProfileViewController" {
             switch direction {
-            case "left":
+            case "right":
                 newViewController = "DiscoverViewController"
             default:
                 print("no where to go")

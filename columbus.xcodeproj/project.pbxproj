@@ -13,6 +13,7 @@
 		4B480BCC1BCC960E00EA137F /* GoogleMapsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B480BCB1BCC960E00EA137F /* GoogleMapsClient.swift */; settings = {ASSET_TAGS = (); }; };
 		4B480BCE1BCD2ECB00EA137F /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B480BCD1BCD2ECB00EA137F /* MapsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4B480BD01BCD320D00EA137F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B480BCF1BCD320D00EA137F /* MainViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4B523F291BCDFD160092A7BD /* MediaDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B523F281BCDFD160092A7BD /* MediaDetailedViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4BB9245D1BCAE37B0008866B /* location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB9245C1BCAE37B0008866B /* location.swift */; settings = {ASSET_TAGS = (); }; };
 		9061010F1BB9E45A00AFAB6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061010E1BB9E45A00AFAB6E /* AppDelegate.swift */; };
 		906101111BB9E45A00AFAB6E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906101101BB9E45A00AFAB6E /* LoginViewController.swift */; };
@@ -44,6 +45,7 @@
 		4B480BCB1BCC960E00EA137F /* GoogleMapsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMapsClient.swift; sourceTree = "<group>"; };
 		4B480BCD1BCD2ECB00EA137F /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		4B480BCF1BCD320D00EA137F /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4B523F281BCDFD160092A7BD /* MediaDetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailedViewController.swift; sourceTree = "<group>"; };
 		4BB9245C1BCAE37B0008866B /* location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = location.swift; sourceTree = "<group>"; };
 		63F2B5850C5B7E2E95865752 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		906101091BB9E45A00AFAB6E /* columbus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = columbus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 				4B480BCD1BCD2ECB00EA137F /* MapsViewController.swift */,
 				906B7B781BCB09E60072E2C7 /* AddLocationViewController.swift */,
 				4B480BCF1BCD320D00EA137F /* MainViewController.swift */,
+				4B523F281BCDFD160092A7BD /* MediaDetailedViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				4B480BCE1BCD2ECB00EA137F /* MapsViewController.swift in Sources */,
 				4B1B0F721BC29AA400485507 /* User.swift in Sources */,
 				906101111BB9E45A00AFAB6E /* LoginViewController.swift in Sources */,
+				4B523F291BCDFD160092A7BD /* MediaDetailedViewController.swift in Sources */,
 				906B7B6C1BCAD6F40072E2C7 /* ProfileViewController.swift in Sources */,
 				4BB9245D1BCAE37B0008866B /* location.swift in Sources */,
 				906B7B741BCAD8AB0072E2C7 /* SwipeViewController.swift in Sources */,
