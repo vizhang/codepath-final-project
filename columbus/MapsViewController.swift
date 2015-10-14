@@ -18,6 +18,13 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate, UIGesture
     var currentTappedIndex : Int?
     var gotLocation = false
     
+    @IBAction func favButtonClicked(sender: UIButton) {
+        
+        
+    }
+    @IBAction func locationButtonClicked(sender: UIButton) {
+        gotLocation = false;
+    }
     @IBOutlet weak var mapView: UIView!
     
 

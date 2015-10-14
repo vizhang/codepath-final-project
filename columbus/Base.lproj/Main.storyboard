@@ -118,11 +118,15 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxZ-JL-s4q">
                                 <rect key="frame" x="245" y="493" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.11998051694117189" green="0.67929292929292928" blue="0.20708377214758944" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="U18-Qq-HJS"/>
                                     <constraint firstAttribute="width" constant="50" id="h60-8e-nAV"/>
                                 </constraints>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="plus">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <segue destination="b4I-3W-Ak3" kind="modal" id="cZt-co-Pc4"/>
                                 </connections>
@@ -498,21 +502,27 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kA1-NH-x0i">
-                                <rect key="frame" x="279" y="507" width="32" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kA1-NH-x0i">
+                                <rect key="frame" x="280" y="508" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7pe-MP-njl"/>
                                     <constraint firstAttribute="width" constant="30" id="fOW-8d-d5o"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="location"/>
+                                <connections>
+                                    <action selector="locationButtonClicked:" destination="0zH-3G-oSV" eventType="touchUpInside" id="h95-w4-RdB"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KX3-c5-fhN">
-                                <rect key="frame" x="239" y="507" width="32" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KX3-c5-fhN">
+                                <rect key="frame" x="240" y="508" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="bie-FN-Mtc"/>
                                     <constraint firstAttribute="height" constant="30" id="eXq-vl-Jnt"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="favorite"/>
+                                <connections>
+                                    <action selector="favButtonClicked:" destination="0zH-3G-oSV" eventType="touchUpInside" id="fDW-vR-5VQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -542,5 +552,6 @@
     <resources>
         <image name="favorite" width="32" height="32"/>
         <image name="location" width="32" height="32"/>
+        <image name="plus" width="48" height="48"/>
     </resources>
 </document>
