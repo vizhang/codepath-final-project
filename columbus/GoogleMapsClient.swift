@@ -17,5 +17,6 @@ class GoogleClient {
     }
     
     static let APIKEY: String = "AIzaSyD7KGVXHJQQGh16qiGSte4dAO0n409QsjQ"
+    //static let APIKEY: String = "AIzaSyBqabmZ4JEmWrv2E6QQNRKzxdquvOwoDnY"
     
 }

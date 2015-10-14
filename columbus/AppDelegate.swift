@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //for now, lets just go to discover page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let nav = storyboard.instantiateViewControllerWithIdentifier("MainViewController")
+            //let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
             //let nav = storyboard.instantiateViewControllerWithIdentifier("FavouritesViewController")
             window?.rootViewController = nav //force the change
             
