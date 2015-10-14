@@ -8,17 +8,23 @@
 
 import UIKit
 
-class AddLocationViewController: UIViewController {
+class AddLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var locationSearchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var placesClient: GMSPlacesClient?
+    var locations: [Location]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        placesClient = GMSPlacesClient()
-        placeAutocomplete()
 
+        tableView.delegate = self
+        tableView.dataSource = self
+        locationSearchBar.delegate = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,28 +34,6 @@ class AddLocationViewController: UIViewController {
         
     }
 
-    func placeAutocomplete() {
-        print("place Autocomplete started")
-        
-        let filter = GMSAutocompleteFilter()
-        filter.type = GMSPlacesAutocompleteTypeFilter.City
-        placesClient?.autocompleteQuery("Toronto", bounds: nil, filter: filter, callback: { (results, error: NSError?) -> Void in
-            
-            
-            if let error = error {
-                print("Autocomplete error \(error)")
-            }
-            
-            for result in results! {
-                if let result = result as? GMSAutocompletePrediction {
-                    var a = 
-                    //print("\()")
-                    print("\(result.attributedFullText) with placeID \(result.placeID)")
-                }
-            }
-        })
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,46 +41,42 @@ class AddLocationViewController: UIViewController {
 
     // MARK: - Table view data source
 
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.locations != nil {
+            return self.locations!.count
+        }
+        else {
+            return 0
+        }
     }
 
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        cell.textLabel?.text = "lol"
         return cell
     }
-    */
+    
+    func searchBarSearchButtonClicked( searchBar: UISearchBar)
+    {
+        print("search clicked: \(searchBar.text!)")
+        GoogleClient.sharedInstance.placeAutocomplete(searchBar.text!, callback: {(success, locationList) -> Void in
+            if (success) {
+                self.locations = locationList
+                self.tableView.reloadData()
+            } else {
+                print("got no locations to list")
+            }
+        })
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func searchBar( searchBar: UISearchBar, textDidChange searchText: String) {
+        print("searching...\(searchText)")
     }
-    */
 
+    @IBAction func onBackPressed(sender: AnyObject) {
+                self.dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
@@ -111,11 +91,6 @@ class AddLocationViewController: UIViewController {
         return true
     }
     */
-
-    
-    @IBAction func onBackPressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
     
     /*

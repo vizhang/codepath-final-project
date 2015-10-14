@@ -13,6 +13,7 @@ class Location: NSObject {
     var lat: String?
     var lng: String?
     var name: String?
+    var placeID: String?
     
     init(lat : String, lng: String) {
         self.lat = lat
@@ -22,6 +23,12 @@ class Location: NSObject {
         self.lat = lat
         self.lng = lng
         self.name = name
+    }
+    init(lat: String, lng: String, name: String, placeID: String) {
+        self.lat = lat
+        self.lng = lng
+        self.name = name
+        self.placeID = placeID
     }
     
     func isItSameCoord(lat: String, lng: String) -> Bool{
