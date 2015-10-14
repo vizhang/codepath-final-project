@@ -51,8 +51,9 @@ class AddLocationViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.textLabel?.text = "lol"
+        var cell = self.tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        var l = self.locations![indexPath.row]
+        cell.textLabel?.text = l.name
         return cell
     }
     
