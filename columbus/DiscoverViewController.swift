@@ -56,6 +56,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     }
     
     func getMediaInSelectedLocation () {
+        print("get media in selected location in discover controller")
         InstagramClient.sharedInstance.getNearByMediaItems(location!, callback:{  (success, mediaItems) -> Void in
             self.mediaItems = mediaItems
             self.mediaItemArray = self.createASingleListOfMedia();

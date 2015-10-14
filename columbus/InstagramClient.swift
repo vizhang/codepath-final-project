@@ -15,6 +15,7 @@ import UIKit
 let consumerkey = "8f8f7c19b14c4a548330197a139d8ce8"
 let consumerSecret = "cbf0c4ebf65940519ad3f615e9521523"
 let baseUrl = "https://api.instagram.com"
+let distance = 5000
 
 class InstagramClient : BDBOAuth1RequestOperationManager {
     
@@ -85,12 +86,11 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
                     
                     let eachLocation = locationList[index] as! NSDictionary
                     let locationDetails = NSMutableDictionary()
-                    locationDetails.setValue(Location(lat: String(eachLocation["latitude"]), lng: String(eachLocation["longitude"]) , name: String(eachLocation["name"])), forKey: "location")
+                    locationDetails.setValue(Location(lat: String(eachLocation["latitude"]!), lng: String(eachLocation["longitude"]!) , name: String(eachLocation["name"])), forKey: "location")
                     let locationId = eachLocation["id"] as! String
                     self.getRecentMedia(locationId, callback: {(success, mediaList) -> Void in
                         totalCount--
                         if (success) {
-                            print("fetched the media list")
                             locationDetails.setValue(mediaList, forKey: "mediaItem")
                             allMediaItem.addObject(locationDetails)
                         } else {
@@ -119,6 +119,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
         var params: [String:String] = [:]
         params["lat"] = location.lat
         params["lng"] = location.lng
+        params["distance"] = "\(distance)"
         sendRequest(url, method: "GET", params: params, callback: {(success, json) -> Void in
             if(success) {
                 callback(success, json as! NSArray)
@@ -163,10 +164,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
         let manager = AFHTTPRequestOperationManager()
         let fullUrl = baseUrl + url
 
-        print("full URL: \(fullUrl)")
-
         params["access_token"] = self.accessToken
-        print("Params: \(params)")
         switch(method) {
         case "GET":
             manager.GET(fullUrl, parameters: params, success: { (operation, responseObject) -> Void in

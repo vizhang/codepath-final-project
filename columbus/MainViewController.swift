@@ -59,7 +59,6 @@ class MainViewController: UIViewController {
     
     
     @IBAction func onPanGesture(sender: AnyObject) {
-        print("here is the gesture")
         let velocity = sender.velocityInView(view)
         var direction : String!
         
