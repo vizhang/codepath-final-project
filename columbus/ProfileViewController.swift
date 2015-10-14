@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController {
         let user = User.currentUser
         if let pp = user?.profile_picture {
             profileImageView.setImageWithURL( NSURL(string: pp))
+            profileImageView.layer.cornerRadius = 3
+            profileImageView.clipsToBounds = true
         }
         usernameLabel.text = user?.username
         bioLabel.text = user?.bio
