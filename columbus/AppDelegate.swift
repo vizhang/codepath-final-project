@@ -97,7 +97,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 print("Moving to Discover Page")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let nav = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
+                let nav = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! MainViewController
+                nav.currentViewController = "ProfileViewController"
+
                 self.window?.rootViewController = nav //force the change
                 
             } else {

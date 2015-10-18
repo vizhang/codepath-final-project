@@ -15,6 +15,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     let locationManager = CLLocationManager()
     var mediaItems: NSArray?
     var mediaItemArray : NSArray?
+    var gotLocation = false
     
     @IBOutlet weak var mapView: UIView!
 
@@ -31,7 +32,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
         self.mediaCollectionView.delegate = self
         self.mediaCollectionView.dataSource = self
         self.mediaCollectionView.scrollEnabled = false
-
+        gotLocation = false
 
         // Do any additional setup after loading the view.
     }
@@ -58,18 +59,26 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
     func getMediaInSelectedLocation () {
         print("get media in selected location in discover controller")
         InstagramClient.sharedInstance.getNearByMediaItems(location!, callback:{  (success, mediaItems) -> Void in
-            self.mediaItems = mediaItems
-            self.mediaItemArray = self.createASingleListOfMedia();
-            self.mediaCollectionView.reloadData()
+            if (success) {
+                self.mediaItems = mediaItems
+                self.mediaItemArray = self.createASingleListOfMedia();
+                self.mediaCollectionView.reloadData()
+            } else {
+                print("not able to get media in discover view")
+            }
         });
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let currLocation = manager.location
+        if (gotLocation ) {
+            return
+        }
+        gotLocation = true
 
-        self.location = Location(lat: "\(currLocation?.coordinate.latitude)",lng: "\(currLocation?.coordinate.longitude)")
+        self.location = Location(lat: "\((currLocation?.coordinate.latitude)!)",lng: "\((currLocation?.coordinate.longitude)!)")
         //this line is for simulation. remove it
-        self.location = Location(lat: "40.7577", lng: "73.9857")
+        //self.location = Location(lat: "40.7577", lng: "73.9857")
         User.currentUser!.location = location
         getMediaInSelectedLocation()
         self.addMapToMapView()

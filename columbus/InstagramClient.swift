@@ -15,7 +15,7 @@ import UIKit
 let consumerkey = "8f8f7c19b14c4a548330197a139d8ce8"
 let consumerSecret = "cbf0c4ebf65940519ad3f615e9521523"
 let baseUrl = "https://api.instagram.com"
-let distance = 5000
+let distance = 1000
 
 class InstagramClient : BDBOAuth1RequestOperationManager {
     
@@ -174,6 +174,7 @@ class InstagramClient : BDBOAuth1RequestOperationManager {
                     callback(false, responseObject)
                 }
             }, failure: { (operation, requestError) -> Void in
+                    print(requestError)
                     callback(false, requestError)
             })
         default:

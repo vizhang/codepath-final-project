@@ -517,13 +517,15 @@
                                     <action selector="locationButtonClicked:" destination="0zH-3G-oSV" eventType="touchUpInside" id="h95-w4-RdB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KX3-c5-fhN">
-                                <rect key="frame" x="240" y="508" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KX3-c5-fhN">
+                                <rect key="frame" x="239" y="507" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="bie-FN-Mtc"/>
                                     <constraint firstAttribute="height" constant="30" id="eXq-vl-Jnt"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="favorite"/>
+                                <state key="normal" image="favorite">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="favButtonClicked:" destination="0zH-3G-oSV" eventType="touchUpInside" id="fDW-vR-5VQ"/>
                                 </connections>

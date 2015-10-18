@@ -41,6 +41,9 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (locations?.count == 0) {
+            noFavs1Label.hidden = true
+        }
         
         return locations?.count ?? 0
     }
