@@ -122,7 +122,8 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
             for var mediaInd = 0; mediaInd < mediaLoc.count; mediaInd++ {
                 let mediaObj: [String:AnyObject] = [
                     "location": self.mediaItems![locind]["location"] as! Location,
-                    "media": mediaLoc[mediaInd]
+                    "media": mediaLoc[mediaInd],
+                    "locind": locind
                 ]
                 singleListMediaItem.addObject(mediaObj)
             }
@@ -137,6 +138,24 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate, UICol
         let gmapView = GMSMapView.mapWithFrame(CGRectMake(0, 0, self.mapView.bounds.width, self.mapView.bounds.height), camera: camera)
         gmapView.myLocationEnabled = true
         self.mapView.addSubview(gmapView)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "discovertodetailed" {
+            
+            
+            let vc = segue.destinationViewController as! MediaDetailedViewController
+            let indexPath = mediaCollectionView.indexPathForCell(sender as! MediaItemCollectionViewCell)
+            let item = mediaItemArray![(indexPath!.item)] as! NSDictionary
+            let locind = item["locind"] as! Int
+            
+            vc.mediaAtLoc = self.mediaItems![locind] as? NSDictionary
+            print(vc.mediaAtLoc!["mediaItem"])
+        }
     }
     
 

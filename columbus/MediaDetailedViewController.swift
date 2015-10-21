@@ -30,6 +30,7 @@ class MediaDetailedViewController: UIViewController {
     
     func loadTheMedia() {
         let mediaItems = mediaAtLoc!["mediaItem"] as! NSArray
+        print("media Items count \(mediaItems.count)")
         let location = mediaAtLoc!["location"]
         if (startIndex >= mediaItems.count) {
             startIndex = 0
@@ -56,24 +57,17 @@ class MediaDetailedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
 
-        let velocity = sender.velocityInView(view)
+    @IBAction func onSwipeOnMedia(sender: UISwipeGestureRecognizer) {
+        print("gesture");
         
-        if sender.state == UIGestureRecognizerState.Began {
-            
-        } else if sender.state == UIGestureRecognizerState.Changed {
-        } else if sender.state == UIGestureRecognizerState.Ended {
-            print("pan gesture")
-            if (velocity.x > 0) {
-                startIndex++;
-            } else {
-                startIndex--;
-            }
+        if sender.direction == UISwipeGestureRecognizerDirection.Right {
+            startIndex++;
+        } else {
+            startIndex--;
         }
         loadTheMedia()
     }
-
     /*
     // MARK: - Navigation
 

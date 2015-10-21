@@ -336,10 +336,11 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ux1-da-d6H" appends="YES" id="dgL-gw-jOB"/>
+                                    <outletCollection property="gestureRecognizers" destination="toV-mj-Hik" appends="YES" id="8YY-K9-8Vw"/>
+                                    <outletCollection property="gestureRecognizers" destination="wHk-xH-HpZ" appends="YES" id="X5C-VV-gYz"/>
                                 </connections>
                             </imageView>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-w1-Ovy">
+                            <view opaque="NO" alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-w1-Ovy">
                                 <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHA-F6-YBV">
@@ -405,11 +406,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aFz-mM-2eI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="ux1-da-d6H">
+                <swipeGestureRecognizer direction="right" id="toV-mj-Hik">
                     <connections>
-                        <action selector="onPanGesture:" destination="ymb-vV-92K" id="T64-XZ-m3i"/>
+                        <action selector="onSwipeOnMedia:" destination="ymb-vV-92K" id="A7I-XP-PCa"/>
                     </connections>
-                </panGestureRecognizer>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="wHk-xH-HpZ">
+                    <connections>
+                        <action selector="onSwipeOnMedia:" destination="ymb-vV-92K" id="6uD-cc-bRw"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1423" y="2759"/>
         </scene>
@@ -464,6 +470,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="mediaImageView" destination="kgG-Kz-cdR" id="dij-Qm-BMd"/>
+                                            <segue destination="ymb-vV-92K" kind="modal" identifier="discovertodetailed" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="fAh-bu-fLE"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -560,4 +567,7 @@
         <image name="location" width="32" height="32"/>
         <image name="plus" width="48" height="48"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="fAh-bu-fLE"/>
+    </inferredMetricsTieBreakers>
 </document>
