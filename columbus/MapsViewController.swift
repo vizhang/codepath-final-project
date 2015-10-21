@@ -21,15 +21,24 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate, UIGesture
     @IBAction func favButtonClicked(sender: UIButton) {
         sender.setImage(UIImage(named: "red_fav"), forState: .Normal)
         
-        var userFav = NSUserDefaults.standardUserDefaults().objectForKey("userfav") as? NSMutableArray
+        var userFav = NSUserDefaults.standardUserDefaults().objectForKey("userFav")
+        if userFav == nil {
+            userFav = NSMutableArray()
+        } else {
+            userFav = userFav?.mutableCopy() as! NSMutableArray
+        }
+        print("Getting user Fav")
         
-        userFav = userFav ?? ( NSMutableArray())
         let someMediaUrls = getMediaUrls()
+        print("getting medis urls")
+        print(someMediaUrls)
         
         let newFav = NSMutableDictionary()
         newFav.setValue(getSerializeCurrentLocation(), forKey: "location")
         newFav.setValue(someMediaUrls, forKey: "mediaUrls")
-        userFav!.addObject(newFav);
+        print("created new fav")
+        userFav!.addObject(newFav as NSDictionary);
+        print("add new fav")
         NSUserDefaults.standardUserDefaults().setObject(userFav, forKey: "userFav")
         NSUserDefaults.standardUserDefaults().synchronize()
 
@@ -59,14 +68,23 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate, UIGesture
     func getMediaUrls() -> [String]{
         var mediaUrls = [String]();
         if (mediaItems == nil) {
+            print("returning empty");
             return mediaUrls
         }
         
         for (var locindex = 0 ; locindex < mediaItems!.count; locindex++) {
-            let mediaList = mediaItems![0]["mediaItem"] as! NSArray
+            let locMedia = mediaItems![locindex] as! NSDictionary
+            let mediaList = locMedia["mediaItem"] as! NSArray
+            if (mediaUrls.count > 5) {
+                break;
+            }
             for (var medIndex = 0; medIndex < mediaList.count; medIndex++) {
-                let media = mediaList[0] as! NSDictionary
+                let media = mediaList[medIndex] as! NSDictionary
                 mediaUrls.append(media.valueForKeyPath("images.low_resolution.url") as! String)
+                if (mediaUrls.count > 5) {
+                    break;
+                }
+                
             }
         }
         
@@ -80,7 +98,7 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate, UIGesture
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         getCurrentLocation();
-        gotLocation = false
+        //gotLocation = false
         // Do any additional setup after loading the view.
     }
 
@@ -107,6 +125,7 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate, UIGesture
     
     func getMediaInSelectedLocation () {
         InstagramClient.sharedInstance.getNearByMediaItems(location!, callback:{  (success, mediaItems) -> Void in
+            print("getting media for map")
             if success {
                 self.mediaItems = mediaItems
                 self.showMediaInMap()

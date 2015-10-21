@@ -12,6 +12,7 @@ class LocationTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var imageHolder: UIView!
     var location: Location! {
         didSet {
             //nameLabel?.text = location?.name
