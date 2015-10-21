@@ -57,6 +57,30 @@ class AddLocationViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let row = indexPath.row
+        var loc = self.locations![row]
+        print("\(loc.name)")
+        print("\(loc.lat)")
+        print("\(loc.lng)")
+
+        GoogleClient.sharedInstance.lookUpPlaceID(loc.placeID!) { (success, locations) -> Void in
+            if success {
+                if let loc = locations {
+                print("\(loc.name)")
+                print("\(loc.lat)")
+                print("\(loc.lng)")
+                }
+            }
+        }
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        if cell != nil {
+            
+        }
+    }
+    
     func searchBarSearchButtonClicked( searchBar: UISearchBar)
     {
         print("search clicked: \(searchBar.text!)")

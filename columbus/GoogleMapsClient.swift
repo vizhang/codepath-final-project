@@ -52,4 +52,21 @@ class GoogleClient {
         })
     }
     
+    func lookUpPlaceID (placeID: String, callback: (success: Bool, locations: Location?)-> Void)  {
+        self.placesClient = GMSPlacesClient()
+        placesClient?.lookUpPlaceID(placeID, callback: { (retGMSPlace: GMSPlace?, error: NSError?) -> Void in
+            if let error = error {
+                print("lookup error")
+                callback(success: false, locations: nil)
+            } else {
+                if let retGMSPlace = retGMSPlace as GMSPlace? {
+                    var lng = String(retGMSPlace.coordinate.longitude)
+                    var lat = String(retGMSPlace.coordinate.latitude)
+
+                    callback(success: true, locations: Location(lat: lat, lng:lng, name:retGMSPlace.name, placeID: retGMSPlace.placeID))
+                }
+            }
+        })
+    }
+    
 }
