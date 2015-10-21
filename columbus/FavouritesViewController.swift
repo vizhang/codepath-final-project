@@ -103,6 +103,8 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func onAddPressed(sender: AnyObject) {
         print("add new location pressed")
         //Open modal for a new search popover
+        performSegueWithIdentifier("segueToAddLocation", sender: nil)
+        //
     }
     
     

@@ -147,7 +147,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="b4I-3W-Ak3" kind="modal" id="cZt-co-Pc4"/>
+                                    <action selector="onAddPressed:" destination="7pp-gG-wET" eventType="touchUpInside" id="tuQ-So-CrK"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Saved Locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzU-wH-wIM">
@@ -185,6 +185,7 @@
                         <outlet property="noFavs1Label" destination="mzU-wH-wIM" id="bHD-2v-xBn"/>
                         <outlet property="noFavs2Label" destination="LBM-XA-7xL" id="GCD-lr-vt1"/>
                         <outlet property="tableView" destination="yGY-dk-MYv" id="Nrp-ei-j5j"/>
+                        <segue destination="b4I-3W-Ak3" kind="modal" identifier="segueToAddLocation" id="Xpr-qm-DQF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8U-J7-DrR" userLabel="First Responder" sceneMemberID="firstResponder"/>
