@@ -12,8 +12,8 @@ import UIKit
 
 
 
-let consumerkey = "8f8f7c19b14c4a548330197a139d8ce8"
-let consumerSecret = "cbf0c4ebf65940519ad3f615e9521523"
+let consumerkey = "38e3a648a4054d43a160df95a7762c31"
+let consumerSecret = "cf7e64a288df4705aad50f02c538ef01"
 let baseUrl = "https://api.instagram.com"
 let distance = 1000
 

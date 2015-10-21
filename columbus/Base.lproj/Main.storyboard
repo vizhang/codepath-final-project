@@ -137,7 +137,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxZ-JL-s4q">
                                 <rect key="frame" x="245" y="493" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.11998051694117189" green="0.67929292929292928" blue="0.20708377214758944" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="U18-Qq-HJS"/>
                                     <constraint firstAttribute="width" constant="50" id="h60-8e-nAV"/>
@@ -163,7 +163,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.80000001192092896" green="1" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mzU-wH-wIM" firstAttribute="leading" secondItem="7IM-Tr-nhv" secondAttribute="leading" id="6eD-HH-kOr"/>
                             <constraint firstAttribute="trailing" secondItem="yGY-dk-MYv" secondAttribute="trailing" id="NjA-aQ-f0k"/>
@@ -298,11 +298,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbF-0T-Czz">
-                                <rect key="frame" x="130" y="498" width="60" height="30"/>
+                                <rect key="frame" x="129" y="497" width="62" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Rfm-yK-iDk"/>
-                                    <constraint firstAttribute="height" constant="30" id="aBP-gf-XJt"/>
+                                    <constraint firstAttribute="width" constant="62" id="Rfm-yK-iDk"/>
+                                    <constraint firstAttribute="height" constant="32" id="aBP-gf-XJt"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                                 <state key="normal" title="Sign Out"/>
                                 <connections>
                                     <action selector="onSignOutPressed:" destination="rdL-CE-FKG" eventType="touchUpInside" id="cyb-il-9it"/>
@@ -315,7 +316,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="0.58999999999999997" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="AbF-0T-Czz" firstAttribute="centerX" secondItem="pSr-7d-fAm" secondAttribute="centerX" id="7fq-ZV-Sd0"/>
                             <constraint firstAttribute="trailing" secondItem="tls-9Y-U2n" secondAttribute="trailing" constant="20" id="8D5-8s-UlR"/>
@@ -326,7 +327,7 @@
                             <constraint firstItem="qVL-Ai-sYc" firstAttribute="leading" secondItem="pSr-7d-fAm" secondAttribute="leading" constant="20" id="Qcc-vE-D1d"/>
                             <constraint firstItem="gNc-7A-TBn" firstAttribute="centerX" secondItem="pSr-7d-fAm" secondAttribute="centerX" id="ilm-3T-F5V"/>
                             <constraint firstItem="tls-9Y-U2n" firstAttribute="leading" secondItem="pSr-7d-fAm" secondAttribute="leading" constant="20" id="piW-rn-cpp"/>
-                            <constraint firstItem="TQo-cu-eLk" firstAttribute="top" secondItem="AbF-0T-Czz" secondAttribute="bottom" constant="40" id="qQb-Es-GHj"/>
+                            <constraint firstItem="TQo-cu-eLk" firstAttribute="top" secondItem="AbF-0T-Czz" secondAttribute="bottom" constant="39" id="qQb-Es-GHj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Gwg-v9-qrV"/>
